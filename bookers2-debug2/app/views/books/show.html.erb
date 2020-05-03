@@ -53,12 +53,23 @@
 					<% end %>
 				</tr>
 			</table>
-				<% @book.book_comments.each do |book| %>
+			<table class="show-tb">
+			<tr>
+				<% @book.book_comments.each do |book_comment| %>
+				<td><%= link_to user_path(book_comment.user), class: "user_#{book_comment.user.id}" do %>
+                <%= attachment_image_tag book_comment.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %><br>
 				<%= @book.user.name %>
-				<%= @book_comment.comment %>
 				<% end %>
+			</td>
+				<%= @book_comment.comment %>
+				<% unless current_user != book_comment.user %>
+            	<td><%= link_to 'Destroy', book_book_comments_path(book_comment.id), class: 'btn-sm btn-danger', method: :delete %></td>
+          		<% end %>
+          	</tr>
+				<% end %>
+			</table>
 				<%= form_for [@book,@book_comment] do |f| %>
-				<%= f.text_area :comment, rows:'5', class: "form-control" %>
+				<%= f.text_area :comment, size: "90x5" %>
 				<%= f.submit "送信" %>
 				<% end %>
 	</div>
