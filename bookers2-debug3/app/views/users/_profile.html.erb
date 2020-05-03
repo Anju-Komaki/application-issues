@@ -14,13 +14,13 @@
 		 	<th>follows</th>
 		 <th><% user ||= current_user %>
          <%=link_to (followed_user_path(user)) do %>
-         <%= user.follower.count %>
+         <%= user.followed.count %>
          <% end %><th>
          </tr>
          <tr>
          	<th>followers</th>
          <th><%=link_to (follower_user_path(user)) do %>
-         <%= user.followed.count %>
+         <%= user.follower.count %>
          <% end %></th>
          </tr>
          <tr><% if current_user.following?(user) %>
