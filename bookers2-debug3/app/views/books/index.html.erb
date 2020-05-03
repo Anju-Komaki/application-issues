@@ -58,8 +58,13 @@
     				<% end %>
 					</td>
 					<td>コメント数:<%= book.book_comments.count %></td>
-				</tr>
 				<% end %>
+				<% if current_user.following?(@user) %>
+        		<td><%= link_to 'フォロー外す', unfollow_path(@user), method: :POST %></td>
+      			<% else %>
+        		<td><%= link_to 'フォローする', follow_path(@user), method: :POST %></td>
+				<% end %>
+			</tr>
 			</tbody>
 		</table>
 
