@@ -49,11 +49,18 @@
     						<% end %>
 					</td>
 					<td><i class="fa fa-comment"></i>
-                    <%= @book.post_comments.count %></td>
+                    コメント数:<%= @book.book_comments.count %></td>
 					<% end %>
 				</tr>
 			</table>
-
+				<% @book.book_comments.each do |book| %>
+				<%= @book.user.name %>
+				<%= @book_comment.comment %>
+				<% end %>
+				<%= form_for [@book,@book_comment] do |f| %>
+				<%= f.text_area :comment, rows:'5', class: "form-control" %>
+				<%= f.submit "送信" %>
+				<% end %>
 	</div>
 </div>
 
