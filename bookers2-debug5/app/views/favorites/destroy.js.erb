@@ -1,1 +1,5 @@
-$('#likes_buttons_<%= @book.id %>').html("<%= j(render partial: 'favorites/like', locals: {book: @book}) %>");
+if (location.pathname == '/books') {
+  $(".book_<%= @book.id %>").html("<%= j(render 'books/book',  book: @book ) %>")
+} else {
+  $(".book_<%= @book.id %>").html("<%= j(render 'books/detail',  book: @book ) %>")
+}

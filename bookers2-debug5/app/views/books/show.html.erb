@@ -22,31 +22,16 @@
 
 	<div class="col-xs-9">
 		<h2>Book detail</h2>
-
-		<table class="table">
-				<tr>
-					<td>
-						<%= link_to (@book.user) do %>
-						<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
-						<%= @book.user.name %>
-						<% end %>
-					</td>
-					<td><%= link_to @book.title, book_path(@book.id), class: "book_#{@book.id}" %></td>
-					<td><%= @book.body %></td>
-					<% if @book.user == current_user %>
-					<td><%= link_to "Edit",edit_book_path(@book.id), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
-					<td><%= link_to "Destroy",@books, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
-					<td><%= render partial: 'favorites/like', locals: { book: @book} %></td>
-					<td><i class="fa fa-comment"></i>
-                    コメント数:<%= @book.book_comments.count %></td>
-					<% end %>
-					<% if current_user.following?(@user) %>
-                    <td><%= link_to 'フォロー外す', unfollow_path(@user), method: :POST %></td>
-                    <% else %>
-                    <td><%= link_to 'フォローする', follow_path(@user), method: :POST %></td>
-                    <% end %>
-				</tr>
-			</table>
+		<table class='table'>
+		  <tr class="book_<%= @book.id %>">
+          <%= render 'detail', book: @book %>
+		  <% if current_user.following?(@user) %>
+          <td><%= link_to 'フォロー外す', unfollow_path(@user), method: :POST %></td>
+          <% else %>
+          <td><%= link_to 'フォローする', follow_path(@user), method: :POST %></td>
+          <% end %>
+		   </tr>
+		</table>
     <table class="show-tb comment_<%= @book.id %>">
       <%= render 'comment', book_comments: @book.book_comments %>
     </table>
