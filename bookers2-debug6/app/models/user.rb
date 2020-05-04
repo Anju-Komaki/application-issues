@@ -51,4 +51,16 @@ class User < ApplicationRecord
           end
   end
 
+ #add adress
+ include JpPrefecture
+  jp_prefecture :prefecturecode
+
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecturecode).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecturecode = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+
 end
