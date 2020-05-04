@@ -1,2 +1,3 @@
- $('#js-table-book_comment').html("<%= j(render 'book_comments/comments',{ comments: @book_comments }) %>");
- $('#book_comment_comment').val('')
+$("textarea").val("");
+$(".book_<%= @book.id %>").html("<%= j(render 'books/detail', book: @book ) %>");
+$(".comment_<%= @book.id %>").html("<%= j(render 'books/comment', book_comments: @book.book_comments ) %>");

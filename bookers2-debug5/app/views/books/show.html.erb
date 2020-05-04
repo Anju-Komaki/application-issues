@@ -47,15 +47,15 @@
                     <% end %>
 				</tr>
 			</table>
-			<table class="show-tb">
-			<tr>
-			<%= render 'book_comments/comment', comment: @comment %>
-          	</tr>
-			</table>
-				<%= form_with model: [@book, @book_comment], remote: true do |f| %>
-    			<%= f.text_area :comment, class: "input-mysize" %>
-    			<%= f.submit "送信", class: "btn btn-outline-dark comment-submit float-right" %>
-				<% end %>
+    <table class="show-tb comment_<%= @book.id %>">
+      <%= render 'comment', book_comments: @book.book_comments %>
+    </table>
+    <div class="comment-form">
+      <%= form_with model:[@book, @book_comment], data: {remote: true} do |f| %>
+        <%= f.text_area :comment, size: "90x5" %>
+        <%= f.submit '送信' %>
+      <% end %>
+    </div>
 	</div>
 </div>
 
