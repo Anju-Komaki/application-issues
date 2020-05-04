@@ -1,0 +1,1 @@
+$('#book_comment-<%= @book_comment.id %>').remove();
