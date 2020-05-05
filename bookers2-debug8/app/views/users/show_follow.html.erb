@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<tbody>
+ <% @user.followed.each do |user| %>
+   <tr>
+     <td><%= attachment_image_tag(@user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+     <td><%= @user.name %></td>
+     <td>フォロー数:<%= @user.followed.count %></td>
+     <td>フォロワー数:<%= @user.follower.count %></td>
+    <% if current_user.following?(@user) %>
+     <td><%= link_to 'フォロー外す', unfollow_path(@user), method: :POST %></td>
+    <% else %>
+     <td><%= link_to 'フォローする', follow_path(@user), method: :POST %></td>
+    <% end %>
+     <td><%= link_to 'show', user_path(user) %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
