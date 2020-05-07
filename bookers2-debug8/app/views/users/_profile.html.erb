@@ -38,3 +38,8 @@
 	<%= link_to '',user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
 	<% end  %>
 </div>
+<div class="row">
+<% unless current_user.id == user.id %>
+	<%= link_to 'チャットを始める', chat_path(user.id) %>
+<% end %>
+</div>

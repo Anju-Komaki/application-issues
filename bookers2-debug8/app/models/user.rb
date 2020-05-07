@@ -17,6 +17,10 @@ class User < ApplicationRecord
   has_many :follower_user, through: :followed, source: :follower
   attachment :profile_image, destroy: false
 
+  has_many :rooms, through: :user_rooms
+  has_many :user_rooms
+  has_many :chats
+
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name,presence: true, length: {maximum: 20, minimum: 2}
   validates :introduction, length: { maximum:50 }
